@@ -1,24 +1,17 @@
 import React, { useState } from "react"
-import {
-  Grid,
-  Box,
-  Typography,
-  Button
-} from "@mui/material"
-
+import { Grid, Box, Typography, Button } from "@mui/material"
 import "./style.css"
 import { NavLink } from "react-router-dom"
 
+export default function ProductCard({ image, title, }) {
 
-export default function ProductCard({ image, title,}) {
-    
-const[isHovered,setIsHovered]=useState(false);
-const handleMouseEnter=()=>{
-  setIsHovered(true);
-};
-const handleMouseLeave=()=>{
-  setIsHovered(false);
-};
+  const setIsHovered = useState(false);
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
   return (
     <Box
