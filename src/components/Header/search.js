@@ -1,17 +1,7 @@
 import { useState, React } from 'react';
-import $ from 'jquery';
-import {
-    Box,
-    Grid,
-    Typography,
-    Button,
-    TextField,
-    Divider,
-
-} from "@mui/material"
+import { Box, Grid, Typography, Button, TextField, Divider } from "@mui/material"
 import Home from "../../pages/Home/Home"
 import data from '../../pages/Home/data';
-import "./style.css"
 
 const menu = [
     {
@@ -38,34 +28,22 @@ const menu = [
 ];
 
 export default function BasicPopover() {
-
     const [search, setSearch] = useState("");
-    console.log(search);
     // search handler
     const searchItem = data.filter((item) => {
-
-        if (search == "") {
-            return item
+        if (!search) {
+            return true; // if search is empty, return all items
         }
-        else if (item.title.toLowerCase().includes(search.toLowerCase())) {
-            return item
-        }
-
+        return item.title.toLowerCase().includes(search.toLowerCase());
     });
     // handle event for button
 
-const [selectedCategory, setSelectedCategory] = useState("All");
+    const setSelectedCategory = useState("All");
 
-const handleCategorySelect = (category) => {
-    setSelectedCategory(category);
-};
+    const handleCategorySelect = (category) => {
+        setSelectedCategory(category);
+    };
 
-const filteredData = data.filter((item) => {
-    if (selectedCategory === "All") {
-        return true;
-    }
-    return item.category.includes(selectedCategory);
-});
     return (
         <>
             <Box
@@ -103,7 +81,7 @@ const filteredData = data.filter((item) => {
                                     borderRadius: ".3rem"
                                 }}>
                                 <Grid container spacing={2} >
-                                    <Grid item lg={12} xs={12}  md={12}onChange={event => setSearch(event.target.value)}>
+                                    <Grid item lg={12} xs={12} md={12} onChange={event => setSearch(event.target.value)}>
                                         <TextField
                                             id="outlined-basic"
                                             label="Search for anything..."
@@ -130,8 +108,8 @@ const filteredData = data.filter((item) => {
                     justifyContent: "center",
                     textAlign: "center"
                 }}>
-                    {menu.map((menu,index) => (
-                        <Grid item lg={1} xs={1} md={1}>
+                    {menu.map((menu, index) => (
+                        <Grid item lg={1} xs={1} md={1} key={index}>
                             <Box sx={{
                                 display: 'flex',
                                 justifyContent: 'center',
@@ -141,8 +119,8 @@ const filteredData = data.filter((item) => {
                             }}
                                 className="bg">
                                 <Button variant="soft"
-                                key={index} 
-                                onClick={() => handleCategorySelect(menu.title)}
+                                    key={index}
+                                    onClick={() => handleCategorySelect(menu.title)}
                                     style={{
                                         fontSize: "1.2rem",
                                         color: "#2b2d89",
