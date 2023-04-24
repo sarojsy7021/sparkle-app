@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom"
 
 export default function ProductCard({ image, title, }) {
 
-  const setIsHovered = useState(false);
+  const [Ishover, setIsHovered] = useState(false);
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
